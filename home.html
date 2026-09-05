@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>for Leyla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="sky"></canvas>
+
+  <audio id="bgm" loop autoplay>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle" id="musicToggle" aria-label="Play background music">♪</button>
+
+  <!-- ===================== SECTION 1: SNAKE INTRO ===================== -->
+  <section class="scene scene--intro" id="intro">
+    <div class="snake-wrap">
+      <svg class="snake" viewBox="0 0 600 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path id="snakeBody" class="snake__body"
+          d="M40,220 C110,120 150,280 220,190 C280,115 320,250 380,170 C430,105 460,200 520,150"
+          stroke="url(#scaleGradient)" stroke-width="22" stroke-linecap="round" />
+        <path class="snake__ridge"
+          d="M40,220 C110,120 150,280 220,190 C280,115 320,250 380,170 C430,105 460,200 520,150"
+          stroke="#1f6f6b" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 10" />
+        <g class="snake__head" transform="translate(520,150)">
+          <ellipse cx="0" cy="0" rx="26" ry="20" fill="url(#headGradient)" />
+          <circle class="snake__eye" cx="10" cy="-8" r="4" fill="#e8e3d3" />
+          <circle class="snake__eye-pupil" cx="11" cy="-8" r="1.6" fill="#0a0e1a" />
+          <path class="snake__tongue" d="M24,2 L38,2 M38,2 L44,-4 M38,2 L44,8" stroke="#7a0f1f" stroke-width="2" stroke-linecap="round" />
+        </g>
+        <defs>
+          <linearGradient id="scaleGradient" x1="0" y1="0" x2="600" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#4a2530"/>
+            <stop offset="0.5" stop-color="#7a0f1f"/>
+            <stop offset="1" stop-color="#1f6f6b"/>
+          </linearGradient>
+          <linearGradient id="headGradient" x1="-26" y1="-20" x2="26" y2="20" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#8a1626"/>
+            <stop offset="1" stop-color="#5c0f1a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div class="speech" id="speech">
+        <p id="speechText"></p>
+      </div>
+    </div>
+
+    <button class="scroll-cue" id="scrollCue" aria-label="Scroll down">
+      <span></span>
+    </button>
+  </section>
+
+  <!-- ===================== SECTION 2: WHY I LOVE YOU ===================== -->
+  <section class="scene scene--reasons" id="reasons">
+    <p class="eyebrow-free-label">a running list, Leyla</p>
+    <h2 class="section-heading">why i love you</h2>
+    <div class="reason-card">
+      <p id="reasonText">tap the snake below for a reason</p>
+    </div>
+    <button class="reason-btn" id="reasonBtn">
+      <svg class="reason-btn__icon" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+        <path d="M4 12c3-6 6 3 8-1 s4-6 8 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      tap for another reason
+    </button>
+    <p class="reason-count" id="reasonCount"></p>
+  </section>
+
+  <!-- ===================== SECTION 3: TIME TOGETHER ===================== -->
+  <section class="scene scene--counter" id="counter">
+    <p class="eyebrow-free-label">since the 21st of August, 2026</p>
+    <h2 class="section-heading">me and you, so far</h2>
+    <div class="counter__grid">
+      <div class="counter__item">
+        <span class="counter__num" id="days">0</span>
+        <span class="counter__label">days</span>
+      </div>
+      <div class="counter__item">
+        <span class="counter__num" id="hours">0</span>
+        <span class="counter__label">hours</span>
+      </div>
+      <div class="counter__item">
+        <span class="counter__num" id="minutes">0</span>
+        <span class="counter__label">minutes</span>
+      </div>
+      <div class="counter__item">
+        <span class="counter__num" id="seconds">0</span>
+        <span class="counter__label">seconds</span>
+      </div>
+    </div>
+    <p class="counter__footnote">and counting, Leyla. not going anywhere.</p>
+  </section>
+
+  <!-- ===================== SECTION 5: HUG ===================== -->
+  <section class="scene scene--hug" id="hug">
+    <p class="eyebrow-free-label">emergency supplies</p>
+    <h2 class="section-heading">need a hug, Baby?</h2>
+    <p class="hug__sub">go on, press it</p>
+    <button class="hug-btn" id="hugBtn">hug me</button>
+    <div class="hug-layer" id="hugLayer" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===================== SECTION 6: SNAKE GAME ===================== -->
+  <section class="scene scene--game" id="game">
+    <p class="eyebrow-free-label">since you like snakes so much</p>
+    <h2 class="section-heading">beat my score love</h2>
+    <div class="game-box">
+      <canvas id="gameCanvas" width="320" height="320"></canvas>
+      <div class="game-overlay" id="gameOverlay">
+        <p id="gameOverlayText">press play, or use an arrow key</p>
+        <button class="game-start" id="gameStart">play</button>
+      </div>
+    </div>
+    <div class="game-info">
+      <span>score: <strong id="gameScore">0</strong></span>
+      <span>best: <strong id="gameBest">0</strong></span>
+    </div>
+    <div class="game-pad" id="gamePad" aria-hidden="true">
+      <button data-dir="up" aria-label="Up">↑</button>
+      <div class="game-pad__row">
+        <button data-dir="left" aria-label="Left">←</button>
+        <button data-dir="down" aria-label="Down">↓</button>
+        <button data-dir="right" aria-label="Right">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 7: CLOSING ===================== -->
+  <section class="scene scene--closing" id="closing">
+    <svg class="closing__snake" viewBox="0 0 200 80" width="140" aria-hidden="true">
+      <path d="M10,60 C40,20 60,70 90,40 C120,10 140,60 170,30" stroke="#1f6f6b" stroke-width="8" stroke-linecap="round" fill="none"/>
+    </svg>
+    <p class="closing__text">That's all for now, Leyla.<br>i'll be adding to this.</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
